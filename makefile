@@ -1,15 +1,17 @@
 # TheGrand547 makefile
 FLAGS=-ansi -pedantic -Wall -Werror
 LIBS=-lncurses
-DEPEND=test.o 
+DEPEND= 
 
 all: main
 
-main: $(DEPEND) 
+main: main.o $(DEPEND) 
 	gcc -g -o $@ $^ $(LIBS)
 
 
 %.o: %.c
 	gcc $(FLAGS) -g -c $< -o $@
 
+clean:
+	rm -rf *.o
 
