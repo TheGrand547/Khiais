@@ -1,17 +1,31 @@
 # TheGrand547 makefile
-FLAGS=-ansi -pedantic -Wall -Werror
-LIBS=-lncurses
-DEPEND= 
+CC=gcc
+CFLAGS=-g
+CPPFLAGS=-g -ansi -pedantic -Wall -Werror
+LDLIBS=-lncurses
+LDFLAGS=-g
+DEPEND=word.o
+SOURCE=*.c
 
-all: main
+all: main tags
 
 main: main.o $(DEPEND) 
-	gcc -g -o $@ $^ $(LIBS)
+	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-
-%.o: %.c
-	gcc $(FLAGS) -g -c $< -o $@
+a.o: .c
+	gcc $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -rf *.o
+	rm -f *.o *.d
+	rm -f main
 
+tags: *.c
+	ctags -R .
+
+depend: .depend
+
+.depend: *.c
+	rm -f .depend	
+	$(CC) $(CPPFLAGS) -MM $^>>./.depend
+
+include .depend

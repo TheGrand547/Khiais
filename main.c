@@ -1,9 +1,10 @@
 /* Gaming */
 #include <ncurses.h>
 #include "debug.h"
+#include "word.h"
+#include "structs.h"
 
 int setup();
-
 int main()
 {
 	char a;
@@ -12,14 +13,14 @@ int main()
 	printw("This is in ncurses.\n");
 	printw("\n\nEpic gamin\n");
 	refresh();
-	a = getch();
-
-	attron(A_BLINK | A_BOLD);	
-	printw("EPIC %c\n", a);
-	attroff(A_BLINK | A_BOLD);
-	refresh();
-	
-	getch();
+	getword(NULL);
+	while ((a = getch()) != 'q')
+	{
+		attron(A_BLINK | A_BOLD);	
+		printw("EPIC %c\n", a);
+		attroff(A_BLINK | A_BOLD);
+		refresh();
+	}	
 	endwin();
 	return 0;
 }
