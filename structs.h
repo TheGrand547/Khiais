@@ -1,9 +1,18 @@
 /* Structs */
 #ifndef STRUCTS_H
 #define STRUCTS_H
-typedef struct {
-	int x, y;
-	char vis;
+typedef enum {
+	Standard, NonStandard
+} Type;
 
-} Block;
+typedef struct {
+	char vis;
+	void *data;
+	int flags;
+} Element;
+
+typedef struct {
+	Element **elements;
+	Type type;
+} Room;
 #endif

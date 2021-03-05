@@ -16,8 +16,7 @@ a.o: .c
 	gcc $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o *.d
-	rm -f main
+	rm -f *.o main
 
 tags: *.c
 	ctags -R .
