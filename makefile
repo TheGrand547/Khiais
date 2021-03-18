@@ -12,9 +12,6 @@ all: main tags
 main: main.o $(DEPEND) 
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-a.o: .c
-	gcc $(CPPFLAGS) -c $< -o $@
-
 clean:
 	rm -f *.o main ./.depend
 

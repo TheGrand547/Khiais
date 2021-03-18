@@ -1,21 +1,21 @@
 /* Gaming */
+#include <limits.h>
 #include <ncurses.h>
 #include "debug.h"
 #include "word.h"
 #include "structs.h"
 #include "output.h"
+#include "constants.h"
 
 /* Should be put elsewhere */
-#define WIDTH 10
-#define HEIGHT 10
 #define PLAYER_FLAGS A_BOLD
 
+void adjust(Element *e);
 int setup();
 int main(int argc, char **argv)
 {
 	Element e;	
-	int i, j;
-	char inp;	
+	char inp = '\0';	
 	if (!setup())
 		return -1;
 	curs_set(0);
@@ -23,14 +23,9 @@ int main(int argc, char **argv)
 
 	do
 	{
-		clear();
-		move(5, 0);	
-		for (i = 0; i < HEIGHT; i++)
-		{
-			for (j = 0; j < WIDTH; j++)
-				printw(" ~ ");
-			printw("\n");
-		}
+		/* Buffer for status effects and such */
+		printw("Welcome to epic gamin inc.\n");
+		blankBoard();
 		switch (inp)
 		{
 			case 'h':
@@ -48,8 +43,7 @@ int main(int argc, char **argv)
 			default:
 				break;
 		}
-		e.y %= HEIGHT;
-		e.x %= WIDTH;
+		adjust(&e);
 		attron(PLAYER_FLAGS);	
 		display(&e);		
 		attroff(PLAYER_FLAGS);
@@ -57,6 +51,15 @@ int main(int argc, char **argv)
 	} while ((inp = getch()) != 'q');
 	endwin();
 	return 0;
+}
+
+void adjust(Element *e)
+{
+	if (!e) return;
+	if (e->x == UINT_MAX) e->x = WIDTH - 1;
+	if (e->x == WIDTH) e->x = 0;
+	if (e->y == UINT_MAX) e->y = HEIGHT - 1;
+	if (e->y == HEIGHT) e->y = 0;
 }
 
 int setup()
