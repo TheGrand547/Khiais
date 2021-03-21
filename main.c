@@ -6,6 +6,8 @@
 #include "structs.h"
 #include "output.h"
 #include "constants.h"
+#include "player.h"
+#include "util.h"
 
 /* Should be put elsewhere */
 #define PLAYER_FLAGS A_BOLD
@@ -14,39 +16,34 @@ void adjust(Element *e);
 int setup();
 int main(int argc, char **argv)
 {
-	Element e;	
+	Element e = clearElement(), gg = clearElement();	
 	char inp = '\0';	
 	if (!setup())
 		return -1;
 	curs_set(0);
 	e.vis = '?';
-
+	
+	/* gg is a wall thingy */
+	gg.x = 5;
+	gg.y = 10;
+	gg.vis = 'X';
+	e.next = &gg;
+	
 	do
 	{
+		move(0, 0);
 		/* Buffer for status effects and such */
 		printw("Welcome to epic gamin inc.\n");
 		blankBoard();
-		switch (inp)
-		{
-			case 'h':
-				e.x--;
-				break;
-			case 'j':
-				e.y++;
-				break;
-			case 'k':
-				e.y--;
-				break;
-			case 'l':
-				e.x++;
-				break;
-			default:
-				break;
-		}
+		movePlayer(inp, &e);
+		/* this is kinda cringe */	
 		adjust(&e);
+		/* Display Player */
 		attron(PLAYER_FLAGS);	
 		display(&e);		
 		attroff(PLAYER_FLAGS);
+		display(&gg);
+		/* Refresh the screen and stuff */
 		refresh();
 	} while ((inp = getch()) != 'q');
 	endwin();

@@ -4,8 +4,8 @@ CFLAGS=-g
 CPPFLAGS=-g -ansi -pedantic -Wall -Werror
 LDLIBS=-lncurses
 LDFLAGS=-g
-DEPEND=word.o output.o
-SOURCE=*.c
+SOURCE=$(wildcard *.c)
+DEPEND=$(subst .c,.o,$(SOURCE))
 
 all: main tags
 
