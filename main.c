@@ -1,13 +1,5 @@
 /* Gaming */
-#include <limits.h>
-#include <ncurses.h>
-#include "debug.h"
-#include "word.h"
-#include "structs.h"
-#include "output.h"
-#include "constants.h"
-#include "player.h"
-#include "util.h"
+#include "headers.h"
 
 /* Should be put elsewhere */
 #define PLAYER_FLAGS A_BOLD
@@ -16,6 +8,7 @@ void adjust(Element *e);
 int setup();
 int main(int argc, char **argv)
 {
+	int x, y; /* Arbitrary for loop indicies */
 	Element e = clearElement(), gg = clearElement();	
 	char inp = '\0';	
 	if (!setup())
@@ -28,7 +21,9 @@ int main(int argc, char **argv)
 	gg.y = 10;
 	gg.vis = 'X';
 	e.next = &gg;
-	
+	for (x = 0; x < 10; x++)
+		for (y = 0; y < 10; y++)
+			addElementTo(&gg, 6 + y, 10 + x);	
 	do
 	{
 		move(0, 0);
@@ -42,7 +37,10 @@ int main(int argc, char **argv)
 		attron(PLAYER_FLAGS);	
 		display(&e);		
 		attroff(PLAYER_FLAGS);
-		display(&gg);
+		displayElements(&gg);
+
+		emptyRectangle(5, 5, 5, 5, '!');
+		
 		/* Refresh the screen and stuff */
 		refresh();
 	} while ((inp = getch()) != 'q');
