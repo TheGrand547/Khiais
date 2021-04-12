@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 		displayElements(&gg);
 
 		emptyRectangle(5, 5, 5, 5, '!');
-		
+		emptyCircle(15, 7, 2, '$');		
 		/* Refresh the screen and stuff */
 		refresh();
 	} while ((inp = getch()) != 'q');

@@ -10,4 +10,5 @@
 #include "constants.h"
 #include "player.h"
 #include "util.h"
+#include "linked.h"
 #endif

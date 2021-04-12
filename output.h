@@ -6,3 +6,4 @@ void blankBoard();
 void displayElements(Element *e);
 void emptyRectangle(unsigned int x, unsigned int y, unsigned int width,
 			unsigned int height, char display);
+void emptyCircle(unsigned int x, unsigned int y, unsigned int radius, char vis);

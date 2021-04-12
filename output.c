@@ -38,8 +38,25 @@ void emptyRectangle(unsigned int x, unsigned int y,
 	for (i = 0; i < height; i++)
 		for (j = 0; j < width; j++)
 		{
-			move (i + VERTICAL_OFFSET + y, HORIZONTAL_OFFSET + x + j);
+			move(i + VERTICAL_OFFSET + y, j + HORIZONTAL_OFFSET + x);
 			if (!i | !j | i == height - 1 | j == width - 1)
 				addch(display);
+		}
+}
+
+
+void emptyCircle(unsigned int x, unsigned int y, unsigned int radius, char display)
+{
+	int i, j;
+	int product = radius * radius;
+	for (i = 0; i <= 2 * radius; i++)
+		for (j = 0; j <= 2 * radius; j++)
+		{
+			int dist = (i - radius) * (i - radius) + (j - radius) * (j - radius);			
+			move(i + VERTICAL_OFFSET + y, j + HORIZONTAL_OFFSET + x);
+			if (dist <= product)
+			{
+				addch(display);
+			}
 		}
 }
