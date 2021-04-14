@@ -8,44 +8,28 @@ Element clearElement()
 	e.x = 0;
 	e.y = 0;
 	e.vis = '+';
-	e.next = NULL;
 	e.data = NULL;
 	return e;	
 }
 
-Element *addElementTo(Element *e, int x, int y)
+Element *clearElementPointer()
 {
-	Element *new;
-	new = malloc(sizeof(Element));
+	Element *e;
+	e = malloc(sizeof(Element));
+	if (e) *e = clearElement();
+	return e;
+}
+
+
+Element *addElementTo(Linked *l, int x, int y)
+{
+	Element *new = clearElementPointer();
 	if (new)
 	{
-		*new = clearElement();
+		insert(l, new);
 		new->x = x;
 		new->y = y;
-		new->flags |= DYNAMIC;
-		if (e)
-		{
-			while (e->next != NULL) e = e->next;
-			e->next = new;
-		}
 	}
 	return new;
 }
 
-void freeDynamic(Element *e)
-{
-	Element *next;
-	while (e)
-	{
-		if (e->flags | DYNAMIC)
-		{
-			next = e->next;
-			free(e);
-		}
-		else
-		{
-
-
-		}
-	}
-}

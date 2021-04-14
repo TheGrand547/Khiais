@@ -3,6 +3,15 @@
 #include <stdlib.h>
 #include "linked.h"
 
+void iterate(Linked *l, Func func)
+{
+	Node *n;
+	if (l == NULL) return;
+	n = l->head;	
+	do func(n->data);
+	while ((n = n->next));
+}
+
 void insert(Linked *l, void *data)
 {
 	Node *node, *new;
@@ -10,22 +19,33 @@ void insert(Linked *l, void *data)
 	
 	node = l->head;
 
-	while (node->next != NULL) node = node->next;
+	if (node != NULL) 
+		while (node->next != NULL) 
+			node = node->next;
+
 	new = malloc(sizeof(Node));
 	if (new) 
 	{
 		l->size++;
-		node->next = new;
+		if (node == NULL) 
+		{
+			l->head = new;	
+			l->tail = NULL;
+		}
+		else node->next = new;
+
 		new->data = data;
 		new->prev = node;
+		l->tail = new;
 	}
 }
 
-void removeNode(Node *node)
+void removeNode(Linked *l, Node *node)
 {
 	if (!node) return;	
 	if (node->prev) node->prev->next = node->next;
 	if (node->next) node->next->prev = node->prev;
 	free(node);
+	l->size--;
 }
 

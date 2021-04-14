@@ -6,11 +6,14 @@
 
 void adjust(Element *e);
 int setup();
+
 int main(int argc, char **argv)
 {
 	int x, y; /* Arbitrary for loop indicies */
 	Element e = clearElement(), gg = clearElement();	
 	char inp = '\0';	
+
+	Linked list;
 	if (!setup())
 		return -1;
 	curs_set(0);
@@ -20,27 +23,28 @@ int main(int argc, char **argv)
 	gg.x = 5;
 	gg.y = 10;
 	gg.vis = 'X';
-	e.next = &gg;
+
+	list.head = NULL;
+	list.tail = NULL;
+
 	for (x = 0; x < 10; x++)
 		for (y = 0; y < 10; y++)
-			addElementTo(&gg, 6 + y, 10 + x);	
+			addElementTo(&list, 6 + y, 10 + x);	
 	do
 	{
 		move(0, 0);
 		/* Buffer for status effects and such */
 		printw("Welcome to epic gamin inc.\n");
 		blankBoard();
-		movePlayer(inp, &e);
+		movePlayer(inp, &e, &list);
 		/* this is kinda cringe */	
 		adjust(&e);
 		/* Display Player */
-		attron(PLAYER_FLAGS);	
-		display(&e);		
-		attroff(PLAYER_FLAGS);
-		displayElements(&gg);
+		displayFlags(&e, PLAYER_FLAGS);		
+		iterate(&list, display);	
 
 		emptyRectangle(5, 5, 5, 5, '!');
-		emptyCircle(15, 7, 2, '$');		
+		
 		/* Refresh the screen and stuff */
 		refresh();
 	} while ((inp = getch()) != 'q');

@@ -4,13 +4,22 @@
 #include "structs.h"
 #include "constants.h"
 
-int display(Element *e)
+static void _display(Element *e)
 {
-	if (e == NULL)
-		return -1;
-	
+	if (e == NULL) return;
 	mvaddch(e->y + VERTICAL_OFFSET, e->x + HORIZONTAL_OFFSET, e->vis);	
-	return 0;
+}
+
+void display(void *data)
+{
+	_display((Element*) data);
+}
+
+void displayFlags(Element *e, int flags)
+{
+	attron(flags);
+	display(e);
+	attroff(flags);
 }
 
 void blankBoard()
@@ -22,13 +31,6 @@ void blankBoard()
 		for (j = 0; j < WIDTH; j++)
 			printw("~");
 	}
-}
-
-void displayElements(Element *e)
-{
-	if (e == NULL) return;
-	display(e);
-	while ((e = e->next)) display(e);
 }
 
 void emptyRectangle(unsigned int x, unsigned int y, 
@@ -44,19 +46,3 @@ void emptyRectangle(unsigned int x, unsigned int y,
 		}
 }
 
-
-void emptyCircle(unsigned int x, unsigned int y, unsigned int radius, char display)
-{
-	int i, j;
-	int product = radius * radius;
-	for (i = 0; i <= 2 * radius; i++)
-		for (j = 0; j <= 2 * radius; j++)
-		{
-			int dist = (i - radius) * (i - radius) + (j - radius) * (j - radius);			
-			move(i + VERTICAL_OFFSET + y, j + HORIZONTAL_OFFSET + x);
-			if (dist <= product)
-			{
-				addch(display);
-			}
-		}
-}

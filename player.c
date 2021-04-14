@@ -3,9 +3,8 @@
 #include <ncurses.h>
 #include "player.h"
 
-void movePlayer(char move, Element *player)
+void movePlayer(char move, Element *player, Linked *l)
 {
-	Element *next = player->next;		
 	int x = player->x, y = player->y;
 	
 	switch (move)
@@ -17,6 +16,8 @@ void movePlayer(char move, Element *player)
 		default: break;
 	}
 	if (player->x == x && player->y == y) return;
+	/* SHITS FUCKED */
+	/*
 	while (next != NULL)
 	{
 		if (player->x == next->x && player->y == next->y)
@@ -27,4 +28,5 @@ void movePlayer(char move, Element *player)
 		}
 		next = next->next;
 	}
+	*/
 }

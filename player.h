@@ -3,5 +3,5 @@
 #define PLAYER_H
 #include "structs.h"
 
-void movePlayer(char move, Element *player);
+void movePlayer(char move, Element *player, Linked *l);
 #endif
