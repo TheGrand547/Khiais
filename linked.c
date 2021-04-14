@@ -12,6 +12,19 @@ void iterate(Linked *l, Func func)
 	while ((n = n->next));
 }
 
+int boolIterate(Linked *l, void *data, BoolFunc func)
+{
+	int result = 0;
+	Node* node;
+	if (l)
+	{	
+		node = l->head;
+		while (node && !(result = func(data, node->data)))
+			node = node->next; 
+	}
+	return result;
+}
+
 void insert(Linked *l, void *data)
 {
 	Node *node, *new;

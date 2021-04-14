@@ -10,7 +10,7 @@ int setup();
 int main(int argc, char **argv)
 {
 	int x, y; /* Arbitrary for loop indicies */
-	Element e = clearElement(), gg = clearElement();	
+	Element e = clearElement(), *gg;	
 	char inp = '\0';	
 
 	Linked list;
@@ -19,17 +19,16 @@ int main(int argc, char **argv)
 	curs_set(0);
 	e.vis = '?';
 	
-	/* gg is a wall thingy */
-	gg.x = 5;
-	gg.y = 10;
-	gg.vis = 'X';
-
 	list.head = NULL;
 	list.tail = NULL;
 
 	for (x = 0; x < 10; x++)
 		for (y = 0; y < 10; y++)
 			addElementTo(&list, 6 + y, 10 + x);	
+	
+	gg = addElementTo(&list, 10, 5);
+	if (gg) gg->vis = 'X';
+	
 	do
 	{
 		move(0, 0);

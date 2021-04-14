@@ -2,4 +2,4 @@
 #include "structs.h"
 
 Element clearElement();
-Element *addElementTo(Linked *l, int x, int y);
+Element *addElementTo(Linked *l, int y, int x);

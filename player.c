@@ -3,6 +3,20 @@
 #include <ncurses.h>
 #include "player.h"
 
+static int collisionCheck(void *data, void *data2)
+{
+	int result = 0;
+	Element *e, *p;
+	if (data && data2)
+	{
+		e = (Element*) data;
+		p = (Element*) data2;
+		result = (e->x == p->x) && (e->y == p->y);
+
+	}
+	return result;
+}
+
 void movePlayer(char move, Element *player, Linked *l)
 {
 	int x = player->x, y = player->y;
@@ -15,18 +29,9 @@ void movePlayer(char move, Element *player, Linked *l)
 		case 'l': player->x++; break;
 		default: break;
 	}
-	if (player->x == x && player->y == y) return;
-	/* SHITS FUCKED */
-	/*
-	while (next != NULL)
+	if (boolIterate(l, player, collisionCheck))
 	{
-		if (player->x == next->x && player->y == next->y)
-		{
-			player->x = x;
-			player->y = y;
-			break;
-		}
-		next = next->next;
+		player->x = x;
+		player->y = y;
 	}
-	*/
 }

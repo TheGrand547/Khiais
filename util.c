@@ -21,7 +21,7 @@ Element *clearElementPointer()
 }
 
 
-Element *addElementTo(Linked *l, int x, int y)
+Element *addElementTo(Linked *l, int y, int x)
 {
 	Element *new = clearElementPointer();
 	if (new)
