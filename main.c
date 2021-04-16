@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 	e.vis = '?';
 
 	wall = calloc(1, sizeof(Wall));
-	wall->data = NULL; 
+	wall->data = &e; 
 	wall->width = 10;
 	wall->height = 1;
 
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 		/* Display Player */
 		displayFlags(&e, PLAYER_FLAGS);		
 		iterate(&list, display);
-		/*displayWall((void*) &wall);*/
+		displayWall(wall);
 
 		emptyRectangle(5, 5, 5, 5, '!');
 		
