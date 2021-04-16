@@ -16,8 +16,15 @@ typedef struct Element {
 
 
 typedef struct Room {
-	unsigned int height, width, rheight, rwidth;
+	unsigned int x, y, height, width;
+	Linked *walls;
 	Linked *rooms;
 } Room;
+
+typedef struct Wall {
+	unsigned int width, height;
+	Element *data;
+	/* I'm missing something for doors but unsure what */
+} Wall;
 
 #endif

@@ -14,21 +14,32 @@ int main(int argc, char **argv)
 	char inp = '\0';	
 
 	Linked list;
+	Wall *wall;
+	
 	if (!setup())
 		return -1;
+	/* Header thingy that kinda sucks rn but we'll fix it */
+	/*
+	printHeader();
+	getch();
+	*/
 	curs_set(0);
 	e.vis = '?';
-	
+
+	wall = calloc(1, sizeof(Wall));
+	wall->data = NULL; 
+	wall->width = 10;
+	wall->height = 1;
+
 	list.head = NULL;
 	list.tail = NULL;
 
 	for (x = 0; x < 10; x++)
 		for (y = 0; y < 10; y++)
 			addElementTo(&list, 6 + y, 10 + x);	
-	
 	gg = addElementTo(&list, 10, 5);
 	if (gg) gg->vis = 'X';
-	
+
 	do
 	{
 		move(0, 0);
@@ -40,7 +51,8 @@ int main(int argc, char **argv)
 		adjust(&e);
 		/* Display Player */
 		displayFlags(&e, PLAYER_FLAGS);		
-		iterate(&list, display);	
+		iterate(&list, display);
+		/*displayWall((void*) &wall);*/
 
 		emptyRectangle(5, 5, 5, 5, '!');
 		

@@ -36,7 +36,7 @@ void insert(Linked *l, void *data)
 		while (node->next != NULL) 
 			node = node->next;
 
-	new = malloc(sizeof(Node));
+	new = calloc(1, sizeof(Node));
 	if (new) 
 	{
 		l->size++;

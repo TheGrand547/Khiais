@@ -7,7 +7,7 @@
 static void _display(Element *e)
 {
 	if (e == NULL) return;
-	mvaddch(e->y + VERTICAL_OFFSET, e->x + HORIZONTAL_OFFSET, e->vis);	
+	mvaddch(e->y + VERTICAL_OFFSET, e->x + HORIZONTAL_OFFSET, e->vis);
 }
 
 void display(void *data)
@@ -44,5 +44,17 @@ void emptyRectangle(unsigned int x, unsigned int y,
 			if (!i | !j | i == height - 1 | j == width - 1)
 				addch(display);
 		}
+}
+
+/* TODO: Make this not garbage */
+void printHeader()
+{
+	printw("\t,,   ,,\n \
+	||   ||     '   _    '\n \
+	||/\\ ||/\\\\ \\\\  < \\, \\\\  _-_,\n\
+	||_< || || ||  /-|| || ||_. \n\
+	|| | || || || (( || ||  ~ ||\n\
+	\\\\,\\ \\\\ |/ \\\\  \\/\\\\ \\\\ ,-_-  \n\
+	       _/                  ");
 }
 

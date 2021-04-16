@@ -33,3 +33,16 @@ Element *addElementTo(Linked *l, int y, int x)
 	return new;
 }
 
+int collideElement(void *l, void *r)
+{
+	int value = 0;
+	Element *le, *re;
+	if (l && r)
+	{	
+		le = (Element*) l;
+		re = (Element*) r;
+		value = (le->x == re->x) && (le->y == re->y);
+	}
+	return value;
+}
+

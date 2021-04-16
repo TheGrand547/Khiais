@@ -1,6 +1,7 @@
 /* Epic */
 #include "structs.h"
 
+void printHeader();
 void display(void *data);
 void displayFlags(Element *e, int flags);
 void blankBoard();
