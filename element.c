@@ -1,6 +1,6 @@
-/* Util.c */
+/* element.c */
 #include <stdlib.h>
-#include "util.h"
+#include "element.h"
 
 Element clearElement()
 {
@@ -31,6 +31,20 @@ Element *addElementTo(Linked *l, int y, int x)
 		new->y = y;
 	}
 	return new;
+}
+
+Element *makeElement(uint x, uint y, uint flags, char vis, void *data)
+{
+	Element *e;
+	if ((e = clearElementPointer()))
+	{
+		e->x = x;
+		e->y = y;
+		e->flags = flags;
+		e->vis = vis;
+		e->data = data;
+	}
+	return e;
 }
 
 int collideElement(void *l, void *r)

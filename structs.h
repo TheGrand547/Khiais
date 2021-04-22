@@ -2,27 +2,21 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 #include "linked.h"
+#include "types.h"
+#include "element.h"
 
 enum FLAGS {
-	DYNAMIC = 0x00000001
+	WALL = 0x00000001 /* If it's a wall then data is a Wall* pointer */
 };
 
-
-typedef struct Element {
-	char vis;
-	void *data;
-	unsigned int x, y, flags;
-} Element;
-
-
 typedef struct Room {
-	unsigned int x, y, height, width;
+	uint x, y, height, width;
 	Linked *walls;
 	Linked *rooms;
 } Room;
 
 typedef struct Wall {
-	unsigned int width, height;
+	uint width, height;
 	Element *data;
 	/* I'm missing something for doors but unsure what */
 } Wall;

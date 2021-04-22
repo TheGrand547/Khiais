@@ -9,7 +9,6 @@
 #include "output.h"
 #include "constants.h"
 #include "player.h"
-#include "util.h"
 #include "linked.h"
 #include "wall.h"
 #endif

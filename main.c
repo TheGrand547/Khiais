@@ -37,6 +37,7 @@ int main(int argc, char **argv)
 	for (x = 0; x < 10; x++)
 		for (y = 0; y < 10; y++)
 			addElementTo(&list, 6 + y, 10 + x);	
+	
 	gg = addElementTo(&list, 10, 5);
 	if (gg) gg->vis = 'X';
 
