@@ -26,10 +26,7 @@ int main(int argc, char **argv)
 	curs_set(0);
 	e.vis = '?';
 
-	wall = calloc(1, sizeof(Wall));
-	wall->data = &e; 
-	wall->width = 10;
-	wall->height = 1;
+	wall = makeWall(5, 2, 10, 1, '!');
 
 	list.head = NULL;
 	list.tail = NULL;
@@ -37,7 +34,7 @@ int main(int argc, char **argv)
 	for (x = 0; x < 10; x++)
 		for (y = 0; y < 10; y++)
 			addElementTo(&list, 6 + y, 10 + x);	
-	
+	insert(&list, wall->data);	
 	gg = addElementTo(&list, 10, 5);
 	if (gg) gg->vis = 'X';
 

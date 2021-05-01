@@ -11,8 +11,9 @@ typedef struct Element {
 } Element;
 
 int collideElement(void *l, void *r);
+int collidePoint(Element *e, uint y, uint x);
 Element clearElement();
-Element *addElementTo(Linked *l, int y, int x);
+Element *addElementTo(Linked *l, uint y, uint x);
 Element *clearElementPointer();
 Element *makeElement(uint x, uint y, uint flags, char vis, void *data);
 #endif

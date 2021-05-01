@@ -1,5 +1,6 @@
 /* element.c */
 #include <stdlib.h>
+#include "wall.h"
 #include "element.h"
 
 Element clearElement()
@@ -21,7 +22,7 @@ Element *clearElementPointer()
 }
 
 
-Element *addElementTo(Linked *l, int y, int x)
+Element *addElementTo(Linked *l, uint y, uint x)
 {
 	Element *new = clearElementPointer();
 	if (new)
@@ -50,13 +51,19 @@ Element *makeElement(uint x, uint y, uint flags, char vis, void *data)
 int collideElement(void *l, void *r)
 {
 	int value = 0;
-	Element *le, *re;
+	Element *le = l, *re = r;
 	if (l && r)
-	{	
-		le = (Element*) l;
-		re = (Element*) r;
+	{
 		value = (le->x == re->x) && (le->y == re->y);
+		if (re->flags & WALL) value = collideWall(le, re);
 	}
 	return value;
+}
+
+int collidePoint(Element *e, uint x, uint y)
+{
+	int result = 0;
+	if (e) result = (e->x == x) && (e->y == y);
+	return result;
 }
 

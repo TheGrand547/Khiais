@@ -5,5 +5,5 @@
 
 void displayWall(void *data);
 Wall *makeWall(uint x, uint y, uint w, uint h, char vis);
-
+int collideWall(Element *wall, Element *non);
 #endif

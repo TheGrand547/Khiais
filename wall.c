@@ -31,15 +31,23 @@ Wall *makeWall(uint x, uint y, uint w, uint h, char vis)
 		wall->width = w;
 		wall->height = h;
 		wall->data = makeElement(x, y, WALL, vis, wall); 
-		if (!wall->data) return NULL;
+		if (!wall->data) 
+		{
+			free(wall);
+			return NULL;
+		}
 	}
 	return wall;
 }
 
-int collideWall(void *not, void *wall)
+int collideWall(Element *non, Element *wall)
 {
-	
-
-
-	return 0;
+	int result = 0;
+	Wall *w = (Wall*) wall->data;
+	if (non && w)
+	{
+		result = (non->x >= wall->x && non->x < wall->x + w->width) && 
+			(non->y >= wall->y && non->y < wall->y + w->height);
+	}
+	return result;
 }
