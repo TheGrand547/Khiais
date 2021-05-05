@@ -3,7 +3,7 @@
 #define WALL_H
 #include "structs.h"
 
-void displayWall(void *data);
+void displayWall(Element *e);
 Wall *makeWall(uint x, uint y, uint w, uint h, char vis);
 int collideWall(Element *wall, Element *non);
 #endif

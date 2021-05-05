@@ -20,5 +20,4 @@ typedef struct Wall {
 	Element *data;
 	/* I'm missing something for doors but unsure what */
 } Wall;
-
 #endif

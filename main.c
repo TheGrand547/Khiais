@@ -9,11 +9,11 @@ int setup();
 
 int main(int argc, char **argv)
 {
-	int x, y; /* Arbitrary for loop indicies */
+	/* int x, y; */ /* Arbitrary for loop indicies */
 	Element e = clearElement(), *gg;	
 	char inp = '\0';	
 
-	Linked list;
+	Linked *list = makeLinked();
 	Wall *wall;
 	
 	if (!setup())
@@ -26,16 +26,14 @@ int main(int argc, char **argv)
 	curs_set(0);
 	e.vis = '?';
 
-	wall = makeWall(5, 2, 10, 1, '!');
+	wall = makeWall(5, 2, 10, 1, '-');
 
-	list.head = NULL;
-	list.tail = NULL;
+	insert(list, wall->data);
+	insert(list, makeWall(5, 9, 10, 1, '-')->data);
+	insert(list, makeWall(4, 2, 1, 8, '|')->data);
+	insert(list, makeWall(15, 2, 1, 8, '|')->data);
 
-	for (x = 0; x < 10; x++)
-		for (y = 0; y < 10; y++)
-			addElementTo(&list, 6 + y, 10 + x);	
-	insert(&list, wall->data);	
-	gg = addElementTo(&list, 10, 5);
+	gg = addElementTo(list, 12, 5);
 	if (gg) gg->vis = 'X';
 
 	do
@@ -44,15 +42,12 @@ int main(int argc, char **argv)
 		/* Buffer for status effects and such */
 		printw("Welcome to epic gamin inc.\n");
 		blankBoard();
-		movePlayer(inp, &e, &list);
+		movePlayer(inp, &e, list);
 		/* this is kinda cringe */	
 		adjust(&e);
 		/* Display Player */
 		displayFlags(&e, PLAYER_FLAGS);		
-		iterate(&list, display);
-		displayWall(wall);
-
-		emptyRectangle(5, 5, 5, 5, '!');
+		iterate(list, display);
 		
 		/* Refresh the screen and stuff */
 		refresh();

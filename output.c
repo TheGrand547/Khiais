@@ -3,11 +3,15 @@
 #include "output.h"
 #include "structs.h"
 #include "constants.h"
+#include "wall.h" /* TODO: restructure */
 
 static void _display(Element *e)
 {
 	if (e == NULL) return;
-	mvaddch(e->y + VERTICAL_OFFSET, e->x + HORIZONTAL_OFFSET, e->vis);
+	if (e->flags & WALL)
+		displayWall(e);
+	else
+		mvaddch(e->y + VERTICAL_OFFSET, e->x + HORIZONTAL_OFFSET, e->vis);
 }
 
 void display(void *data)

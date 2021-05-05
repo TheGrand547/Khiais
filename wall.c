@@ -17,10 +17,10 @@ static void _displayWall(Wall *w)
 	}	
 }
 
-void displayWall(void *data)
+void displayWall(Element *e)
 {
-	if (data)
-		_displayWall((Wall*) data);
+	if (e && e->data)
+		_displayWall((Wall*) e->data);
 }
 
 Wall *makeWall(uint x, uint y, uint w, uint h, char vis)

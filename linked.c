@@ -3,6 +3,17 @@
 #include <stdlib.h>
 #include "linked.h"
 
+struct _node {
+	struct _node *prev, *next;
+	void *data;
+};
+
+struct _linked {
+	int size;
+	Node *head, *tail;	
+};
+
+
 void iterate(Linked *l, Func func)
 {
 	Node *n;
@@ -60,5 +71,10 @@ void removeNode(Linked *l, Node *node)
 	if (node->next) node->next->prev = node->prev;
 	free(node);
 	l->size--;
+}
+
+
+Linked *makeLinked(){
+	return (Linked*) calloc(1, sizeof(Linked));
 }
 
