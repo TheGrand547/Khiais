@@ -1,17 +1,32 @@
 /* Output for trivial things */
 #include <ncurses.h>
+#include <limits.h>
 #include "output.h"
 #include "structs.h"
 #include "constants.h"
 #include "wall.h" /* TODO: restructure */
 
-static void _display(Element *e)
+static void makeValid(Element *e)
 {
 	if (e == NULL) return;
+	if (e->x == UINT_MAX) e->x = 0;
+	if (e->x >= WIDTH) e->x = WIDTH - 1;
+	if (e->y == UINT_MAX) e->y = 0;
+	if (e->y >= HEIGHT) e->y = HEIGHT - 1;
+}
+
+static void _display(Element *e)
+{
+	int x, y;
+	if (e == NULL) return;
+	makeValid(e);
 	if (e->flags & WALL)
 		displayWall(e);
 	else
-		mvaddch(e->y + VERTICAL_OFFSET, e->x + HORIZONTAL_OFFSET, e->vis);
+		for (y = 0; y < 2; y++)
+			for (x = 0; x < 2; x++)
+				mvaddch((e->y * 2 + y) + VERTICAL_OFFSET, 
+					(e->x * 2 + x) + HORIZONTAL_OFFSET, e->vis);
 }
 
 void display(void *data)
@@ -29,10 +44,10 @@ void displayFlags(Element *e, int flags)
 void blankBoard()
 {
 	int i, j;
-	for (i = 0; i < HEIGHT; i++)
+	for (i = 0; i < TRUE_HEIGHT; i++)
 	{
 		move(i + VERTICAL_OFFSET, HORIZONTAL_OFFSET);
-		for (j = 0; j < WIDTH; j++)
+		for (j = 0; j < TRUE_WIDTH; j++)
 			printw("~");
 	}
 }

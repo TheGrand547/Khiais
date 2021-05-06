@@ -3,23 +3,31 @@
 #include <stdlib.h>
 #include "wall.h"
 #include "constants.h"
+#include "output.h"
 
 static void _displayWall(Wall *w)
 {
-	unsigned int x, y;
+	uint x, y;
+	Element e;
 	if (!w) return;
-	for (y = 0; y < w->height; y++)
+	e.vis = w->data->vis;
+	x = w->data->x + w->width;
+	y = w->data->y + w->height;
+	for (e.y = w->data->y; e.y < y; e.y++)
 	{
-		for (x = 0; x < w->width; x++)
+		for (e.x = w->data->x; e.x < x; e.x++)
+			display(&e);
+			/*
 			mvaddch(w->data->y + y + VERTICAL_OFFSET, 
 				w->data->x + x + HORIZONTAL_OFFSET,
 				w->data->vis);
+			*/
 	}	
 }
 
 void displayWall(Element *e)
 {
-	if (e && e->data)
+	if (e && e->data && e->flags & WALL)
 		_displayWall((Wall*) e->data);
 }
 

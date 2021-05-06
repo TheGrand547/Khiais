@@ -33,36 +33,29 @@ int main(int argc, char **argv)
 	insert(list, makeWall(4, 2, 1, 8, '|')->data);
 	insert(list, makeWall(15, 2, 1, 8, '|')->data);
 
-	gg = addElementTo(list, 12, 5);
+	gg = addElementTo(list, 6, 5);
 	if (gg) gg->vis = 'X';
 
 	do
 	{
+		erase();
 		move(0, 0);
-		/* Buffer for status effects and such */
 		printw("Welcome to epic gamin inc.\n");
+
 		blankBoard();
 		movePlayer(inp, &e, list);
-		/* this is kinda cringe */	
-		adjust(&e);
+		
 		/* Display Player */
 		displayFlags(&e, PLAYER_FLAGS);		
 		iterate(list, display);
+		move(2, 0);
+		printw("%u %u", e.x, e.y);
 		
 		/* Refresh the screen and stuff */
 		refresh();
 	} while ((inp = getch()) != 'q');
 	endwin();
 	return 0;
-}
-
-void adjust(Element *e)
-{
-	if (!e) return;
-	if (e->x == UINT_MAX) e->x = WIDTH - 1;
-	if (e->x == WIDTH) e->x = 0;
-	if (e->y == UINT_MAX) e->y = HEIGHT - 1;
-	if (e->y == HEIGHT) e->y = 0;
 }
 
 int setup()

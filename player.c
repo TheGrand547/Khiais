@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include "player.h"
+#include "constants.h"
 
 void movePlayer(char move, Element *player, Linked *l)
 {
 	int x = player->x, y = player->y;
-	
+
+	/* TODO: Make this portable */
 	switch (move)
 	{
 		case 'h': player->x--; break;
