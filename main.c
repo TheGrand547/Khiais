@@ -12,10 +12,11 @@ int main(int argc, char **argv)
 	/* int x, y; */ /* Arbitrary for loop indicies */
 	Element e = clearElement(), *gg;	
 	char inp = '\0';	
-
-	Linked *list = makeLinked();
-	Wall *wall;
 	
+	Linked *list = makeLinked(), *list2 = makeLinked();
+	Wall *wall;
+
+	Point p;
 	if (!setup())
 		return -1;
 	/* Header thingy that kinda sucks rn but we'll fix it */
@@ -25,6 +26,12 @@ int main(int argc, char **argv)
 	*/
 	curs_set(0);
 	e.vis = '?';
+	
+	p.x = 10;
+	p.y = 11;
+	INSERT(list2, p);
+	p.x = 11;
+	INSERT(list2, p);
 
 	wall = makeWall(5, 2, 10, 1, '-');
 
@@ -48,6 +55,7 @@ int main(int argc, char **argv)
 		/* Display Player */
 		displayFlags(&e, PLAYER_FLAGS);		
 		iterate(list, display);
+		iterate(list2, drawBlank);
 		move(2, 0);
 		printw("%u %u", e.x, e.y);
 		

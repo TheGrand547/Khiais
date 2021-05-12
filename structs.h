@@ -20,4 +20,8 @@ typedef struct Wall {
 	Element *data;
 	/* I'm missing something for doors but unsure what */
 } Wall;
+
+typedef struct Point {
+	unsigned char x, y;
+} Point;
 #endif

@@ -41,6 +41,12 @@ void displayFlags(Element *e, int flags)
 	attroff(flags);
 }
 
+void drawBlank(void *ptr)
+{
+	Point *p = ptr;
+	if (p) mvaddch(VERTICAL_OFFSET + p->y, HORIZONTAL_OFFSET + p->x, '!'); 
+}
+
 void blankBoard()
 {
 	int i, j;
@@ -52,8 +58,8 @@ void blankBoard()
 	}
 }
 
-void emptyRectangle(unsigned int x, unsigned int y, 
-			unsigned int width, unsigned int height, char display)
+void emptyRectangle(uint x, uint y, 
+			uint width, uint height, char display)
 {
 	int i, j;	
 	for (i = 0; i < height; i++)

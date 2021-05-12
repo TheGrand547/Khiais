@@ -1,6 +1,7 @@
 /* linked.c TheGrand547 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "linked.h"
 
 struct _node {
@@ -73,8 +74,15 @@ void removeNode(Linked *l, Node *node)
 	l->size--;
 }
 
-
 Linked *makeLinked(){
 	return (Linked*) calloc(1, sizeof(Linked));
+}
+
+/* Create a copy of the struct in the linked list */
+void insertStruct(Linked *l, void *data, size_t size)
+{
+	void *new = malloc(size);
+	memcpy(new, data, size);	
+	insert(l, new);
 }
 
