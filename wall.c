@@ -10,7 +10,7 @@ static void _displayWall(Wall *w)
 	uint x, y;
 	Element e;
 	if (!w) return;
-	e.vis = w->data->vis;
+	copyVis(w->data, &e);
 	x = w->data->x + w->width;
 	y = w->data->y + w->height;
 	for (e.y = w->data->y; e.y < y; e.y++)

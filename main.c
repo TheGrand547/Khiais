@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 	getch();
 	*/
 	curs_set(0);
-	e.vis = '?';
+	setVis(&e, '?');
 	
 	p.x = 10;
 	p.y = 11;
@@ -41,7 +41,12 @@ int main(int argc, char **argv)
 	insert(list, makeWall(15, 2, 1, 8, '|')->data);
 
 	gg = addElementTo(list, 6, 5);
-	if (gg) gg->vis = 'X';
+	if (gg) setVis(gg, 'X');
+
+	e.vis[0][0] = '/';
+	e.vis[0][1] = '\\';
+	e.vis[1][0] = '\\';
+	e.vis[1][1] = '/';
 
 	do
 	{
@@ -49,7 +54,6 @@ int main(int argc, char **argv)
 		move(0, 0);
 		printw("Welcome to epic gamin inc.\n");
 
-		blankBoard();
 		movePlayer(inp, &e, list);
 		
 		/* Display Player */

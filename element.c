@@ -8,7 +8,7 @@ Element clearElement()
 	Element e;
 	e.x = 0;
 	e.y = 0;
-	e.vis = '+';
+	setVis(&e, '+');
 	e.data = NULL;
 	return e;	
 }
@@ -42,7 +42,7 @@ Element *makeElement(uint x, uint y, uint flags, char vis, void *data)
 		e->x = x;
 		e->y = y;
 		e->flags = flags;
-		e->vis = vis;
+		setVis(e, vis);	
 		e->data = data;
 	}
 	return e;
@@ -65,5 +65,23 @@ int collidePoint(Element *e, uint x, uint y)
 	int result = 0;
 	if (e) result = (e->x == x) && (e->y == y);
 	return result;
+}
+
+void setVis(Element *e, char vis)
+{
+	if (!e) return;
+	e->vis[0][0] = vis;
+	e->vis[0][1] = vis;
+	e->vis[1][0] = vis;
+	e->vis[1][1] = vis;
+}
+
+void copyVis(Element *src, Element *dst)
+{
+	if (!src || !dst) return;
+	dst->vis[0][0] = src->vis[0][0];
+	dst->vis[0][1] = src->vis[0][1];
+	dst->vis[1][0] = src->vis[1][0];
+	dst->vis[1][1] = src->vis[1][1];
 }
 

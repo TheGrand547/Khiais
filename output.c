@@ -26,7 +26,7 @@ static void _display(Element *e)
 		for (y = 0; y < 2; y++)
 			for (x = 0; x < 2; x++)
 				mvaddch((e->y * 2 + y) + VERTICAL_OFFSET, 
-					(e->x * 2 + x) + HORIZONTAL_OFFSET, e->vis);
+					(e->x * 2 + x) + HORIZONTAL_OFFSET, e->vis[y][x]);
 }
 
 void display(void *data)
@@ -45,17 +45,6 @@ void drawBlank(void *ptr)
 {
 	Point *p = ptr;
 	if (p) mvaddch(VERTICAL_OFFSET + p->y, HORIZONTAL_OFFSET + p->x, '!'); 
-}
-
-void blankBoard()
-{
-	int i, j;
-	for (i = 0; i < TRUE_HEIGHT; i++)
-	{
-		move(i + VERTICAL_OFFSET, HORIZONTAL_OFFSET);
-		for (j = 0; j < TRUE_WIDTH; j++)
-			printw("~");
-	}
 }
 
 void emptyRectangle(uint x, uint y, 
