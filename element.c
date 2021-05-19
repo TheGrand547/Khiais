@@ -8,6 +8,7 @@ Element clearElement()
 	Element e;
 	e.x = 0;
 	e.y = 0;
+	e.flags = 0;
 	setVis(&e, '+');
 	e.data = NULL;
 	return e;	

@@ -8,7 +8,7 @@
 static void _displayWall(Wall *w)
 {
 	uint x, y;
-	Element e;
+	Element e = clearElement();
 	if (!w) return;
 	copyVis(w->data, &e);
 	x = w->data->x + w->width;

@@ -47,12 +47,22 @@ int main(int argc, char **argv)
 	e.vis[0][1] = '\\';
 	e.vis[1][0] = '\\';
 	e.vis[1][1] = '/';
-
+	start_color();
+	
+	init_pair(1, COLOR_RED, COLOR_BLACK);
 	do
 	{
 		erase();
 		move(0, 0);
-		printw("Welcome to epic gamin inc.\n");
+		
+		printw("HP: ?/?\nEnergy: ??%\n");
+	
+		attron(COLOR_PAIR(1));
+		move(0, 4);
+		addch('5');
+		move(0, 6);
+		addch('5');
+		attroff(COLOR_PAIR(1));
 
 		movePlayer(inp, &e, list);
 		
