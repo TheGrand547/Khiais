@@ -49,7 +49,8 @@ int main(int argc, char **argv)
 	e.vis[1][1] = '/';
 	start_color();
 	
-	init_pair(1, COLOR_RED, COLOR_BLACK);
+	init_pair(HIGHLIGHT, COLOR_RED, COLOR_BLACK);
+	init_pair(STANDARD, COLOR_GREEN, COLOR_BLACK);
 	do
 	{
 		erase();
@@ -57,17 +58,18 @@ int main(int argc, char **argv)
 		
 		printw("HP: ?/?\nEnergy: ??%\n");
 	
-		attron(COLOR_PAIR(1));
+		attron(COLOR_PAIR(HIGHLIGHT));
 		move(0, 4);
 		addch('5');
 		move(0, 6);
 		addch('5');
-		attroff(COLOR_PAIR(1));
-
+		attroff(COLOR_PAIR(HIGHLIGHT));
+		
 		movePlayer(inp, &e, list);
 		
 		/* Display Player */
 		displayFlags(&e, PLAYER_FLAGS);		
+		attron(COLOR_PAIR(STANDARD));
 		iterate(list, display);
 		iterate(list2, drawBlank);
 		move(2, 0);

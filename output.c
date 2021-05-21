@@ -9,9 +9,9 @@
 static void makeValid(Element *e)
 {
 	if (e == NULL) return;
-	if (e->x == UINT_MAX) e->x = 0;
+	if (e->x == UCHAR_MAX) e->x = 0;
 	if (e->x >= WIDTH) e->x = WIDTH - 1;
-	if (e->y == UINT_MAX) e->y = 0;
+	if (e->y == UCHAR_MAX) e->y = 0;
 	if (e->y >= HEIGHT) e->y = HEIGHT - 1;
 }
 
@@ -36,9 +36,14 @@ void display(void *data)
 
 void displayFlags(Element *e, int flags)
 {
+	uint old_flags;
+	short color; 
+	attr_get(&old_flags, &color, NULL);
+	attroff(old_flags | color);
 	attron(flags);
-	display(e);
+	_display(e);
 	attroff(flags);
+	attron(old_flags);
 }
 
 void drawBlank(void *ptr)

@@ -22,6 +22,6 @@ typedef struct Wall {
 } Wall;
 
 typedef struct Point {
-	unsigned char x, y;
+	uint x, y;
 } Point;
 #endif
