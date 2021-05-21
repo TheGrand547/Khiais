@@ -52,8 +52,8 @@ void drawBlank(void *ptr)
 	if (p) mvaddch(VERTICAL_OFFSET + p->y, HORIZONTAL_OFFSET + p->x, '!'); 
 }
 
-void emptyRectangle(uint x, uint y, 
-			uint width, uint height, char display)
+void emptyRectangle(uint8 x, uint8 y, 
+			uint8 width, uint8 height, char display)
 {
 	int i, j;	
 	for (i = 0; i < height; i++)

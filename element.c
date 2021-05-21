@@ -23,7 +23,7 @@ Element *clearElementPointer()
 }
 
 
-Element *addElementTo(Linked *l, uint y, uint x)
+Element *addElementTo(Linked *l, uint8 y, uint8 x)
 {
 	Element *new = clearElementPointer();
 	if (new)
@@ -35,7 +35,7 @@ Element *addElementTo(Linked *l, uint y, uint x)
 	return new;
 }
 
-Element *makeElement(uint x, uint y, uint flags, char vis, void *data)
+Element *makeElement(uint8 x, uint8 y, uint8 flags, char vis, void *data)
 {
 	Element *e;
 	if ((e = clearElementPointer()))
@@ -61,7 +61,7 @@ int collideElement(void *l, void *r)
 	return value;
 }
 
-int collidePoint(Element *e, uint x, uint y)
+int collidePoint(Element *e, uint8 x, uint8 y)
 {
 	int result = 0;
 	if (e) result = (e->x == x) && (e->y == y);

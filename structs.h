@@ -10,18 +10,18 @@ enum FLAGS {
 };
 
 typedef struct Room {
-	uint x, y, height, width;
+	uint8 x, y, height, width;
 	Linked *walls;
 	Linked *rooms;
 } Room;
 
 typedef struct Wall {
-	uint width, height;
+	uint8 width, height;
 	Element *data;
 	/* I'm missing something for doors but unsure what */
 } Wall;
 
 typedef struct Point {
-	uint x, y;
+	uint8 x, y;
 } Point;
 #endif

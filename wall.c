@@ -7,7 +7,7 @@
 
 static void _displayWall(Wall *w)
 {
-	uint x, y;
+	uint8 x, y;
 	Element e = clearElement();
 	if (!w) return;
 	copyVis(w->data, &e);
@@ -31,7 +31,7 @@ void displayWall(Element *e)
 		_displayWall((Wall*) e->data);
 }
 
-Wall *makeWall(uint x, uint y, uint w, uint h, char vis)
+Wall *makeWall(uint8 x, uint8 y, uint8 w, uint8 h, char vis)
 {	
 	Wall *wall;
 	if ((wall = malloc(sizeof(Wall))))
