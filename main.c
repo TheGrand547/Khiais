@@ -5,7 +5,9 @@
 #define PLAYER_FLAGS A_BOLD
 
 void adjust(Element *e);
+void health();
 int setup();
+
 
 int main(int argc, char **argv)
 {
@@ -53,23 +55,16 @@ int main(int argc, char **argv)
 	init_pair(STANDARD, COLOR_GREEN, COLOR_BLACK);
 	do
 	{
+		attron(COLOR_PAIR(STANDARD));
 		erase();
 		move(0, 0);
 		
 		printw("HP: ?/?\nEnergy: ??%\n");
-	
-		attron(COLOR_PAIR(HIGHLIGHT));
-		move(0, 4);
-		addch('5');
-		move(0, 6);
-		addch('5');
-		attroff(COLOR_PAIR(HIGHLIGHT));
 		
 		movePlayer(inp, &e, list);
-		
+			
 		/* Display Player */
-		displayFlags(&e, PLAYER_FLAGS);		
-		attron(COLOR_PAIR(STANDARD));
+		displayFlagsColorblind(&e, PLAYER_FLAGS);		
 		iterate(list, display);
 		iterate(list2, drawBlank);
 		move(2, 0);
@@ -88,4 +83,14 @@ int setup()
 	if (initscr() != NULL)
 		value = noecho() | cbreak();
 	return !value;
+}
+
+void health()
+{
+	attron(COLOR_PAIR(HIGHLIGHT));
+	move(0, 4);
+	addch('5');
+	move(0, 6);
+	addch('5');
+	attroff(COLOR_PAIR(HIGHLIGHT));
 }
