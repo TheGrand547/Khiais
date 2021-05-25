@@ -3,8 +3,8 @@
 #define CONSTANTS_H
 
 /* Constants for the display interface */
-#define STANDARD 1
-#define HIGHLIGHT 2
+#define STANDARD 2 
+#define HIGHLIGHT 3 
 
 
 /* Size in characters on screen */

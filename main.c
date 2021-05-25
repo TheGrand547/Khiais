@@ -14,11 +14,15 @@ int main(int argc, char **argv)
 	/* int x, y; */ /* Arbitrary for loop indicies */
 	Element e = clearElement(), *gg;	
 	char inp = '\0';	
-	
 	Linked *list = makeLinked(), *list2 = makeLinked();
 	Wall *wall;
 
 	Point p;
+	if (argc > 1)
+	{
+		printf("usage: %s\n", argv[0]);
+		return -1;
+	}
 	if (!setup())
 		return -1;
 	/* Header thingy that kinda sucks rn but we'll fix it */
@@ -44,23 +48,25 @@ int main(int argc, char **argv)
 
 	gg = addElementTo(list, 6, 5);
 	if (gg) setVis(gg, 'X');
-
+	
 	e.vis[0][0] = '/';
 	e.vis[0][1] = '\\';
 	e.vis[1][0] = '\\';
 	e.vis[1][1] = '/';
 	start_color();
 	
-	init_pair(HIGHLIGHT, COLOR_RED, COLOR_BLACK);
-	init_pair(STANDARD, COLOR_GREEN, COLOR_BLACK);
+	/* 40, 254, 20 */
+	init_color(GREEN, 156, 996, 78);	
+	init_color(RED, 0, 0, 1000);	
+	init_pair(HIGHLIGHT, RED, COLOR_BLACK);
+	init_pair(STANDARD, GREEN, COLOR_BLACK);
+	color_set(HIGHLIGHT, NULL);
 	do
 	{
-		attron(COLOR_PAIR(STANDARD));
 		erase();
 		move(0, 0);
 		
 		printw("HP: ?/?\nEnergy: ??%\n");
-		
 		movePlayer(inp, &e, list);
 			
 		/* Display Player */
@@ -68,7 +74,7 @@ int main(int argc, char **argv)
 		iterate(list, display);
 		iterate(list2, drawBlank);
 		move(2, 0);
-		printw("%u %u", e.x, e.y);
+		printw("%.2X %.2X", e.x, e.y);
 		
 		/* Refresh the screen and stuff */
 		refresh();
