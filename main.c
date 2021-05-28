@@ -8,7 +8,6 @@ void adjust(Element *e);
 void health();
 int setup();
 
-
 int main(int argc, char **argv)
 {
 	/* int x, y; */ /* Arbitrary for loop indicies */
@@ -53,14 +52,8 @@ int main(int argc, char **argv)
 	e.vis[0][1] = '\\';
 	e.vis[1][0] = '\\';
 	e.vis[1][1] = '/';
-	start_color();
 	
-	/* 40, 254, 20 */
-	init_color(GREEN, 156, 996, 78);	
-	init_color(RED, 0, 0, 1000);	
-	init_pair(HIGHLIGHT, RED, COLOR_BLACK);
-	init_pair(STANDARD, GREEN, COLOR_BLACK);
-	color_set(HIGHLIGHT, NULL);
+	color_set(STANDARD, NULL);
 	do
 	{
 		erase();
@@ -87,7 +80,10 @@ int setup()
 {
 	int value = 0;	
 	if (initscr() != NULL)
+	{	
 		value = noecho() | cbreak();
+		colorSetup();	
+	}
 	return !value;
 }
 

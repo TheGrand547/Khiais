@@ -2,11 +2,6 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-/* Constants for the display interface */
-#define STANDARD 2 
-#define HIGHLIGHT 3 
-
-
 /* Size in characters on screen */
 #define WIDTH 40
 #define HEIGHT 15
