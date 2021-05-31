@@ -11,5 +11,4 @@
 #include "player.h"
 #include "linked.h"
 #include "wall.h"
-#include "colors.h"
 #endif

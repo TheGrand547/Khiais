@@ -39,22 +39,8 @@ void displayFlags(Element *e, uint flags)
 	uint old_flags;
 	short color; 
 	attr_get(&old_flags, &color, NULL);
-	attroff(old_flags | color);
-	attron(flags);
-	_display(e);
-	attroff(flags);
-	attron(old_flags);
-}
-
-/* Feels hacky */
-void displayFlagsColorblind(Element *e, uint flags)
-{
-	uint old_flags;
-	short color;
-	attr_get(&old_flags, &color, NULL);
 	attroff(old_flags);
-	attron(flags | color);
-	color_set(color, NULL);
+	attron(flags);
 	_display(e);
 	attroff(flags);
 	attron(old_flags);

@@ -4,8 +4,6 @@
 /* Should be put elsewhere */
 #define PLAYER_FLAGS A_BOLD
 
-void adjust(Element *e);
-void health();
 int setup();
 
 int main(int argc, char **argv)
@@ -15,8 +13,8 @@ int main(int argc, char **argv)
 	char inp = '\0';	
 	Linked *list = makeLinked(), *list2 = makeLinked();
 	Wall *wall;
-
 	Point p;
+
 	if (argc > 1)
 	{
 		printf("usage: %s\n", argv[0]);
@@ -52,8 +50,7 @@ int main(int argc, char **argv)
 	e.vis[0][1] = '\\';
 	e.vis[1][0] = '\\';
 	e.vis[1][1] = '/';
-	
-	color_set(STANDARD, NULL);
+
 	do
 	{
 		erase();
@@ -63,7 +60,7 @@ int main(int argc, char **argv)
 		movePlayer(inp, &e, list);
 			
 		/* Display Player */
-		displayFlagsColorblind(&e, PLAYER_FLAGS);		
+		displayFlags(&e, PLAYER_FLAGS);		
 		iterate(list, display);
 		iterate(list2, drawBlank);
 		move(2, 0);
@@ -73,6 +70,7 @@ int main(int argc, char **argv)
 		refresh();
 	} while ((inp = getch()) != 'q');
 	endwin();
+	printf("%s\n%s\n%s\n", __TIMESTAMP__, __TIME__, __DATE__);
 	return 0;
 }
 
@@ -82,17 +80,7 @@ int setup()
 	if (initscr() != NULL)
 	{	
 		value = noecho() | cbreak();
-		colorSetup();	
 	}
 	return !value;
 }
 
-void health()
-{
-	attron(COLOR_PAIR(HIGHLIGHT));
-	move(0, 4);
-	addch('5');
-	move(0, 6);
-	addch('5');
-	attroff(COLOR_PAIR(HIGHLIGHT));
-}

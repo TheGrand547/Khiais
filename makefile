@@ -1,7 +1,7 @@
 # TheGrand547 makefile
 CC=gcc
 CFLAGS=-g
-CPPFLAGS=-g -ansi -pedantic -Wall -Werror
+CPPFLAGS=-g -std=c99 -pedantic -Wall -Wextra -Werror
 LDLIBS=-lncurses
 LDFLAGS=-g
 SOURCE=$(wildcard *.c)
