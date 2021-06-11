@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 		refresh();
 	} while ((inp = getch()) != 'q');
 	endwin();
-	printf("%s\n%s\n%s\n", __TIMESTAMP__, __TIME__, __DATE__);
+	printf("%i\n", COMPILE_TIME);
 	return 0;
 }
 
